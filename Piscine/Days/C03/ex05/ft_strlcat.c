@@ -1,43 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ft.c                                            :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ------ <------@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 20:48:58 by ------            #+#    #+#             */
-/*   Updated: 2026/06/04 20:48:58 by ------           ###   ########.fr       */
+/*   Updated: 2026/06/10 23:13:10 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include <string.h>
 #include <stdio.h>
 
-char	*ft_strcat(char *dest, char *src)
+unsigned int	ft_strlen(char *str)
 {
-	int	i;
-	int	y;
+	unsigned int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
+{
+	unsigned int	i;
+	unsigned int	y;
 
 	i = 0;
 	y = 0;
 	while (dest[i])
 		i++;
-	while (dest[i] || src[y])
+	while (src[y] && i < size - 1)
 	{
 		dest[i] = src[y];
 		i++;
 		y++;
 	}
 	dest[i] = '\0';
-	return (dest);
+	return (ft_strlen(dest) + ft_strlen(src));
 }
-/*
-int	main(void)
-{
-	char	dest[20] = "Hello ";
-	char	src[6] = "World";
-
-	printf("strcat => %s\n", strcat(dest, src));
-	printf("ft_strcat => %s\n", ft_strcat(dest, src));
-	return (0);
-}
-*/

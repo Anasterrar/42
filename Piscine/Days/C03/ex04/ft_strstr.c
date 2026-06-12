@@ -1,43 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ft.c                                            :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ------ <------@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 20:48:58 by ------            #+#    #+#             */
-/*   Updated: 2026/06/04 20:48:58 by ------           ###   ########.fr       */
+/*   Updated: 2026/06/10 11:13:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include <string.h>
 #include <stdio.h>
 
-char	*ft_strcat(char *dest, char *src)
+char	*ft_strstr(char *str, char *to_find)
 {
 	int	i;
 	int	y;
+	int	k;
 
 	i = 0;
-	y = 0;
-	while (dest[i])
-		i++;
-	while (dest[i] || src[y])
+	if (to_find[0] == '\0')
+		return (str);
+	while (str[i])
 	{
-		dest[i] = src[y];
+		if (str[i] == to_find[0])
+		{
+			k = 0;
+			y = i;
+			while (to_find[k] && str[y] == to_find[k])
+			{
+				k++;
+				y++;
+			}
+			if (to_find[k] == '\0')
+				return (&str[i]);
+		}
 		i++;
-		y++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	return (0);
 }
 /*
 int	main(void)
 {
-	char	dest[20] = "Hello ";
-	char	src[6] = "World";
-
-	printf("strcat => %s\n", strcat(dest, src));
-	printf("ft_strcat => %s\n", ft_strcat(dest, src));
+	char	str1[] = "Bonjour, ca va bien ?";
+	char	str2[] = "ca va";
+	printf("=> %s\n", ft_strstr(str1, str2));
 	return (0);
 }
 */

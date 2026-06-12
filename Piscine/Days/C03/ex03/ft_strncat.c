@@ -9,19 +9,18 @@
 /*   Updated: 2026/06/04 20:48:58 by ------           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <string.h>
 #include <stdio.h>
 
-char	*ft_strcat(char *dest, char *src)
+char	*ft_strncat(char *dest, char *src, unsigned int nb)
 {
-	int	i;
-	int	y;
+	unsigned int	i;
+	unsigned int	y;
 
 	i = 0;
 	y = 0;
 	while (dest[i])
 		i++;
-	while (dest[i] || src[y])
+	while ((dest[i] || src[y]) && y < nb)
 	{
 		dest[i] = src[y];
 		i++;
@@ -30,14 +29,3 @@ char	*ft_strcat(char *dest, char *src)
 	dest[i] = '\0';
 	return (dest);
 }
-/*
-int	main(void)
-{
-	char	dest[20] = "Hello ";
-	char	src[6] = "World";
-
-	printf("strcat => %s\n", strcat(dest, src));
-	printf("ft_strcat => %s\n", ft_strcat(dest, src));
-	return (0);
-}
-*/

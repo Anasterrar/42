@@ -9,35 +9,35 @@
 /*   Updated: 2026/06/04 20:48:58 by ------           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <string.h>
-#include <stdio.h>
+#include <unistd.h>
 
-char	*ft_strcat(char *dest, char *src)
+void	ft_putchar(char c)
 {
-	int	i;
-	int	y;
+	write(1, &c, 1);
+}
 
-	i = 0;
-	y = 0;
-	while (dest[i])
-		i++;
-	while (dest[i] || src[y])
+void	ft_putnbr(int nb)
+{
+	if (nb >= 2147483647)
 	{
-		dest[i] = src[y];
-		i++;
-		y++;
+		write(1, "2147483647", 11);
+		return ;
 	}
-	dest[i] = '\0';
-	return (dest);
+	if (nb <= -2147483648)
+	{
+		write(1, "-2147483648", 12);
+		return ;
+	}
+	if (nb < 0)
+	{
+		ft_putchar('-');
+		nb = nb * -1;
+	}
+	if (nb >= 0 && nb <= 9)
+		ft_putchar(nb + '0');
+	if (nb > 9)
+	{
+		ft_putnbr(nb / 10);
+		ft_putnbr(nb % 10);
+	}
 }
-/*
-int	main(void)
-{
-	char	dest[20] = "Hello ";
-	char	src[6] = "World";
-
-	printf("strcat => %s\n", strcat(dest, src));
-	printf("ft_strcat => %s\n", ft_strcat(dest, src));
-	return (0);
-}
-*/
