@@ -1,51 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_ultimate_range.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 20:48:58 by ------            #+#    #+#             */
-/*   Updated: 2026/07/10 15:17:03 by marvin           ###   ########.fr       */
+/*   Updated: 2026/06/14 01:47:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-char	*ft_strstr(char *str, char *to_find)
+int	ft_ultimate_range(int **range, int min, int max)
 {
 	int	i;
-	int	y;
-	int	k;
+	int	len;
 
-	i = 0;
-	if (to_find[0] == '\0')
-		return (str);
-	while (str[i])
+	if (min >= max)
 	{
-		if (str[i] == to_find[0])
-		{
-			k = 0;
-			y = i;
-			while (to_find[k] && str[y] == to_find[k])
-			{
-				k++;
-				y++;
-			}
-			if (to_find[k] == '\0')
-				return (&str[i]);
-		}
+		(*range) = NULL;
+		return (0);
+	}
+	len = max - min;
+	*range = malloc(sizeof(int) * len);
+	if (!*range)
+		return (-1);
+	i = 0;
+	while (i < len)
+	{
+		(*range)[i] = min;
+		min++;
 		i++;
 	}
-	return (0);
+	return (len);
 }
 /*
 int	main(void)
 {
-	char	str1[] = "Bonjour, ca va bien ?";
-	char	str2[] = "ca va";
-	printf("=> %s\n", ft_strstr(str1, str2));
+	int	*range;
+	int	**prange;
+	int	i;
+
+	prange = &range;
+	ft_ultimate_range(prange, -5, 5);
+	i = 0;
+	while (i < 10)
+	{
+		printf("%d\n", (*prange)[i]);
+		i++;
+	}
+	free(range);
 	return (0);
+
 }
 */

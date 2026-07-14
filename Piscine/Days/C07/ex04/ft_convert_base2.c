@@ -1,20 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi_base.c                                     :+:      :+:    :+:   */
+/*   ft_convert_base.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 20:48:58 by ------            #+#    #+#             */
-/*   Updated: 2026/07/12 18:42:20 by marvin           ###   ########.fr       */
+/*   Updated: 2026/07/15 01:00:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-
-int	ft_strlen(char	*str)
+int	ft_strlen(char *str)
 {
 	int	i;
 
@@ -26,22 +22,21 @@ int	ft_strlen(char	*str)
 
 int	is_valid_base(char *base)
 {
-	int	len_base;
 	int	i;
 	int	y;
 
-	len_base = ft_strlen(base);
 	i = 0;
-	if (len_base <= 1)
+	y = 0;
+	if (ft_strlen(base) <= 1)
 		return (0);
 	while (base[i])
 	{
 		if (base[i] == '+' || base[i] == '-')
 			return (0);
 		y = i + 1;
-		while (base[y])
+		while (base[i] && base[y])
 		{
-			if (base[y] == base[i])
+			if (base[i] == base[y])
 				return (0);
 			y++;
 		}
@@ -50,52 +45,38 @@ int	is_valid_base(char *base)
 	return (1);
 }
 
-int	char_in_base(char c, char *base)
+int	is_valid_nbr(char *nbr, char *base)
 {
 	int	i;
+	int	y;
+	int	in_base;
 
 	i = 0;
-	while (base[i])
+	while (nbr[i])
 	{
-		if (base[i] == c)
-			return (i);
+		y = 0;
+		in_base = 0;
+		while (base[y])
+		{
+			if (nbr[i] == base[y] || nbr[i] == ' '
+				|| nbr[i] == '-' || nbr[i] == '+')
+				in_base = 1;
+			y++;
+		}
+		if (in_base == 0)
+			return (0);
 		i++;
 	}
-	return (-1);
+	return (1);
 }
 
-int	ft_atoi_base(char *str, char *base)
+int	is_valid_data(char *nbr, char *base_from, char *base_to)
 {
-	int	i;
-	int	n;
-	int	sign;
-	int	nbr;
-
-	if (is_valid_base(base) == 0)
+	if (is_valid_nbr(nbr, base_from) == 0)
 		return (0);
-	i = 0;
-	sign = 1;
-	nbr = 0;
-	while (str[i] == ' ' || str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign *= -1;
-		i++;
-	}
-	while (str[i])
-	{
-		n = char_in_base(str[i], base);
-		if (n == -1)
-			break ;
-		nbr = nbr * ft_strlen(base) + n;
-		i++;
-	}
-	return (nbr * sign);
+	if (is_valid_base(base_from) == 0)
+		return (0);
+	if (is_valid_base(base_to) == 0)
+		return (0);
+	return (1);
 }
-/*
-int	main(void)
-{
-	printf("%d\n", ft_atoi_base("nn", "poneyvif"));
-	return (0);
-}
-*/

@@ -1,51 +1,56 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 20:48:58 by ------            #+#    #+#             */
-/*   Updated: 2026/07/10 15:17:03 by marvin           ###   ########.fr       */
+/*   Updated: 2026/06/13 19:34:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
-char	*ft_strstr(char *str, char *to_find)
+int	ft_strlen(char *str)
 {
 	int	i;
-	int	y;
-	int	k;
 
 	i = 0;
-	if (to_find[0] == '\0')
-		return (str);
+	while (str[i])
+		i++;
+	return (i);
+}
+
+char	*ft_strdup(char *str)
+{
+	int		i;
+	char	*dup;
+
+	if (!str)
+		return (NULL);
+	i = 0;
+	dup = malloc(sizeof(char) * (ft_strlen(str) + 1));
+	if (!dup)
+		return (NULL);
 	while (str[i])
 	{
-		if (str[i] == to_find[0])
-		{
-			k = 0;
-			y = i;
-			while (to_find[k] && str[y] == to_find[k])
-			{
-				k++;
-				y++;
-			}
-			if (to_find[k] == '\0')
-				return (&str[i]);
-		}
+		dup[i] = str[i];
 		i++;
 	}
-	return (0);
+	dup[i] = '\0';
+	return (dup);
 }
 /*
 int	main(void)
 {
-	char	str1[] = "Bonjour, ca va bien ?";
-	char	str2[] = "ca va";
-	printf("=> %s\n", ft_strstr(str1, str2));
+	char *str;
+
+	str = ft_strdup("Bonjour");
+	printf("%s\n",str);
+	free(str);
 	return (0);
 }
 */
